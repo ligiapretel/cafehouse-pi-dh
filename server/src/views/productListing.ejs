@@ -58,9 +58,10 @@
                   <p class="product-list-features"><%= product.roast %></p>
                   <p class="product-list-price">R$ <%= product.price.replace(".",",") %></p>
                 </a>
-                <a href="/carrinho">
-                  <button type="button" class="btn-edit-forms col-12">Adicionar à sacola</button>
-                </a>
+                <form action="/carrinho/adicionar" method="POST">
+                  <input type="hidden" name="selectedItem" value="<%= product.id %>">
+                  <button type="submit" class="btn-edit-forms col-12">Adicionar à sacola</button>
+                </form>
               </li>
             
             <% }) %>

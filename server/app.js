@@ -5,18 +5,18 @@ const path = require("path");
 const methodOverride = require("method-override");
 const session = require('express-session');
 const cookieParser = require("cookie-parser");
-const bodyParser = require ('body-parser');
+// const bodyParser = require ('body-parser');
 
 const mainRoute = require("./src/routes/mainRoute");
 const productRoute = require("./src/routes/productRoute");
 const checkoutRoute = require("./src/routes/checkoutRoute");
 const userPanelRoute = require("./src/routes/userPanelRoute");
-const carrinhoRoute = require("./src/routes/carrinhoRoute");
+const cartRoute = require("./src/routes/cartRoute");
 const authRoute = require("./src/routes/authRoute");
 const adminRoute = require("./src/routes/admin/adminRoute");
 
-app.use(bodyParser.urlencoded({ extended: false}))
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: false}))
+// app.use(bodyParser.json());
 // Configurando pasta estática para acesso externo (onde ficam as imagens e css)
 app.use(express.static(path.join(__dirname, "public")));
 // Configurando a view engine para ejs
@@ -41,7 +41,7 @@ app.use(session({
 app.use("/produtos", productRoute);
 app.use("/checkout", checkoutRoute);
 app.use("/area-do-cliente", userPanelRoute);
-app.use("/carrinho", carrinhoRoute);
+app.use("/carrinho", cartRoute);
 app.use("/admin", adminRoute);
 app.use("/", authRoute);
 app.use("/", mainRoute);
