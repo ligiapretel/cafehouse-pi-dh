@@ -27,9 +27,10 @@
               <label for="shipping">Calcular frete</label>
               <input type="number" name="shipping" id="shipping" placeholder="00000-000">
             </form>
-            <a href="/carrinho" class="center">
-              <button type="button" class="btn-edit-forms">Adicionar à sacola</button>
-            </a>
+            <form action="/carrinho/adicionar" method="POST">
+              <input type="hidden" name="selectedItem" value="<%= product.id %>">
+              <button type="submit" class="btn-edit-forms col-12">Adicionar à sacola</button>
+            </form>
             <h4 class="description">Descrição</h4>
             <p class="description2"><%= product.description %></p>
             <h4 class="content">Conteúdo</h4>

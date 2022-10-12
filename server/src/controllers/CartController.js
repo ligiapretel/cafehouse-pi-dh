@@ -1,8 +1,15 @@
 const cartController = {
     index: (req,res) => {
+
+        let cartCounter = 0;
+        if(req.session.cart !== undefined){
+            cartCounter = req.session.cart.length;
+        }
+
         return res.render("cart",{
             title:"Carrinho",
-            user: req.cookies.user
+            user: req.cookies.user,
+            cartCounter,
         });
     },
     addCart: (req,res) => {

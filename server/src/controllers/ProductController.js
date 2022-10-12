@@ -75,19 +75,28 @@ const productController = {
                 ]
             });
 
+            //Itens no carrinho
+            let cartCounter = 0;
+            if(req.session.cart !== undefined){
+                cartCounter = req.session.cart.length;
+            }  
+
             return res.render("productListing", {
                 title: "Produtos",
                 products,
                 brands,
                 categories,
                 totalPages,
-                user: req.cookies.user
+                user: req.cookies.user,
+                cartCounter,
             });
 
         } catch (error) {
             return res.render("error", {
                 title: "Ops!",
-                message: "Erro na exibição dos produtos."
+                message: "Erro na exibição dos produtos.",
+                user: req.cookies.user,
+                cartCounter,
             });
         }
 
@@ -107,13 +116,20 @@ const productController = {
                     { model: ImageProduct },
                 ]
             });
+
+            //Itens no carrinho
+            let cartCounter = 0;
+            if(req.session.cart !== undefined){
+                cartCounter = req.session.cart.length;
+            }
             
             // Se não existir, renderiza a view error mostrando a mensagem 
             if (!product) {
                 return res.render("error", {
                     title: "Ops!",
                     message: "Produto não encontrado.",
-                    user: req.cookies.user
+                    user: req.cookies.user,
+                    cartCounter,
                 });
             };
            
@@ -121,14 +137,16 @@ const productController = {
             return res.render("product", {
                 title: "Detalhe do Produto",
                 product,
-                user: req.cookies.user
+                user: req.cookies.user,
+                cartCounter,
             });
 
         }catch(error){
                 return res.render("error", {
                     title: "Ops!",
                     message: "Erro na exibição do produto.",
-                    user: req.cookies.user
+                    user: req.cookies.user,
+                    cartCounter,
                 });
         }
     },

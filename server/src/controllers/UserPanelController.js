@@ -15,28 +15,37 @@ const userPanelController = {
                     { model: UserAddress },
                     { model: ImageUser },
                 ]
-            });           
+            });   
+            
+            //Itens no carrinho
+            let cartCounter = 0;
+            if(req.session.cart !== undefined){
+                cartCounter = req.session.cart.length;
+            }  
 
             //Verificando se existe algum usuário, se não existir, renderiza a view error
             if(!userData){
                 return res.render("error", {
                     title: "Ops!",
                     message: "Usuário não encontrado.",
-                    user: req.cookies.user
+                    user: req.cookies.user,
+                    cartCounter,
                 });
             }
 
             return res.render("userPanel", {
                 title: "Minha conta",
                 userData,
-                user: req.cookies.user
+                user: req.cookies.user,
+                cartCounter,
             });
 
         }catch(error){
             return res.render("error", {
                 title: "Ops!",
                 message: "Usuário não encontrado.",
-                user: req.cookies.user
+                user: req.cookies.user,
+                cartCounter,
             });
         }
     },
@@ -51,43 +60,74 @@ const userPanelController = {
                     { model: UserAddress },
                     { model: ImageUser },
                 ]
-            });           
+            });   
+            
+            //Itens no carrinho
+            let cartCounter = 0;
+            if(req.session.cart !== undefined){
+                cartCounter = req.session.cart.length;
+            }  
 
             if(!userData){
                 return res.render("error", {
                     title: "Ops!",
                     message: "Usuário não encontrado.",
-                    user: req.cookies.user
+                    user: req.cookies.user,
+                    cartCounter,
                 });
             }
 
             return res.render("personalData", {
                 title: "Minha conta",
                 userData,
-                user: req.cookies.user
+                user: req.cookies.user,
+                cartCounter,
             }); 
 
         }catch(error){
             return res.render("error", {
                 title: "Ops!",
                 message: "Erro na exibição dos dados.",
-                user: req.cookies.user
+                user: req.cookies.user,
+                cartCounter,
             });
         }       
     },
     myRequests: (req,res)=>{
+
+        //Itens no carrinho
+        let cartCounter = 0;
+        if(req.session.cart !== undefined){
+            cartCounter = req.session.cart.length;
+        }  
+
         return res.render("myRequests",{
             title:"Meus Pedidos",
-            user: req.cookies.user
+            user: req.cookies.user,
+            cartCounter,
         });
     },
     myAddresses: (req,res)=>{
+
+        //Itens no carrinho
+        let cartCounter = 0;
+        if(req.session.cart !== undefined){
+            cartCounter = req.session.cart.length;
+        }  
+
         return res.render("address",{
             title:"Meus Endereços",
-            user: req.cookies.user
+            user: req.cookies.user,
+            cartCounter,
         });
     },
     createMyAddresses: (req,res)=>{
+
+        //Itens no carrinho
+        let cartCounter = 0;
+        if(req.session.cart !== undefined){
+            cartCounter = req.session.cart.length;
+        }  
 
         const usersJson = fs.readFileSync(
             //Caminho do arquivo
@@ -114,7 +154,7 @@ const userPanelController = {
                !estado || 
                !destinatario)
                {
-                return res.render("/", {message: "preencha todos os campos"})
+                return res.render("/", {message: "preencha todos os campos", cartCounter})
         }
 
 
@@ -131,12 +171,21 @@ const userPanelController = {
         return res.render("userPanel", {
             title: "Minha conta",
             user: personalUser,
+            cartCounter,
         });
     },
     changePassword: (req,res)=>{
+
+        //Itens no carrinho
+        let cartCounter = 0;
+        if(req.session.cart !== undefined){
+            cartCounter = req.session.cart.length;
+        }  
+
         return res.render("changePassword",{
             title:"Alterar Senha",
-            user: req.cookies.user
+            user: req.cookies.user,
+            cartCounter
         });
     },
 };

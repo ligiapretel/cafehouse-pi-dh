@@ -7,15 +7,29 @@ const authController = {
     //Tela para cadastro do usuario 
     register: 
     (req, res) => {
-        return res.render("userRegister", {
-            title: "criarConta",
-            user: req.cookies.user
-        });
+
+      //Itens no carrinho
+      let cartCounter = 0;
+      if(req.session.cart !== undefined){
+          cartCounter = req.session.cart.length;
+      }  
+
+      return res.render("userRegister", {
+          title: "criarConta",
+          user: req.cookies.user,
+          cartCounter,
+      });
     },
     //Processamento do cadastro do usuario
     store: async (req, res) => {
         
         try {
+
+            //Itens no carrinho
+            let cartCounter = 0;
+            if(req.session.cart !== undefined){
+                cartCounter = req.session.cart.length;
+            }  
 
             const {
               nome,
@@ -72,20 +86,36 @@ const authController = {
             title: "Registro",
             error: {
               message: "Erro na criação da conta",
-            }
+            },
+            cartCounter,
           });    
         }
       },
     //Tela para realizar o login
     login: (req, res) => {
+
+        //Itens no carrinho
+        let cartCounter = 0;
+        if(req.session.cart !== undefined){
+            cartCounter = req.session.cart.length;
+        }  
+
         return res.render("login", {
           title: "Login",
-          user: req.cookies.user
+          user: req.cookies.user,
+          cartCounter,
         });
     },
     //Processamento do login
     auth: async (req, res) => {
         try {
+
+          //Itens no carrinho
+          let cartCounter = 0;
+          if(req.session.cart !== undefined){
+              cartCounter = req.session.cart.length;
+          }  
+
           res.clearCookie("user");
           const {
             email,
@@ -103,7 +133,8 @@ const authController = {
               title: "Login",
               error: {
                 message: "Email e/ou senha inválidos"
-              }
+              },
+              cartCounter,
             });
           }
     
@@ -120,12 +151,14 @@ const authController = {
             title: "Login",
             error: {
               message: "Email e/ou senha inválidos"
-            }
+            },
+            cartCounter,
           });
         }
       },
     //Processamento do deslogar
     logout: (req, res) => {
+
         req.session.destroy();
         res.clearCookie("user");
         res.redirect("/");

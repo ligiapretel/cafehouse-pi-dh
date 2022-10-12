@@ -7,6 +7,12 @@ const indexController = {
 
         try{
 
+            // Verificar se a session cart está setada. Se sim, verificar a quantidade de itens, senão, quantidade será 0
+            let cartCounter = 0;
+            if(req.session.cart !== undefined){
+                cartCounter = req.session.cart.length;
+            }        
+
             const bestSellerProducts = await Product.findAll({
                 where: {
                     active: 1,
@@ -31,33 +37,57 @@ const indexController = {
                 title:"Home",
                 bestSellerProducts,
                 newestProducts,
-                user: req.cookies.user
+                user: req.cookies.user,
+                cartCounter,
             });
 
         }catch(error){
             return res.render("error", {
                 title: "Ops!",
-                message: "Erro na exibição da página."
+                message: "Erro na exibição da página.",
+                user: req.cookies.user,
+                cartCounter,
             });
         }
 
     },
     about: (req,res)=>{
+
+        let cartCounter = 0;
+        if(req.session.cart !== undefined){
+            cartCounter = req.session.cart.length;
+        }
+
         return res.render("about",{
             title:"Sobre Nós",
-            user: req.cookies.user
+            user: req.cookies.user,
+            cartCounter,
         });
     },
     blog: (req,res)=>{
+
+        let cartCounter = 0;
+        if(req.session.cart !== undefined){
+            cartCounter = req.session.cart.length;
+        }
+
         return res.render("blog",{
             title:"Blog",
-            user: req.cookies.user
+            user: req.cookies.user,
+            cartCounter,
         });
     },
     contact: (req,res)=>{
+
+        let cartCounter = 0;
+        if(req.session.cart !== undefined){
+            cartCounter = req.session.cart.length;
+        }
+
         return res.render("contact",{
             title:"Contato",
-            user: req.cookies.user
+            user: req.cookies.user,
+            cartCounter,
         });
     }
 };

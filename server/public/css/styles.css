@@ -185,6 +185,23 @@ header {
     width: 25px;
 }
 
+#cart-counter {
+    position: fixed;
+    right: 0.7rem;
+    top: 3.5rem;
+    background-color: #AF4319;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+#cart-counter p{
+    color: #fff;
+    font-size: 0.8rem;
+}
+
 /* Fim CSS header */
 
 /* CSS footer */
