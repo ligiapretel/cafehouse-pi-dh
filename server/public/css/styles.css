@@ -188,7 +188,7 @@ header {
 #cart-counter {
     position: fixed;
     right: 0.7rem;
-    top: 3.5rem;
+    top: 1.2rem;
     background-color: #AF4319;
     width: 1.2rem;
     height: 1.2rem;
@@ -244,6 +244,20 @@ footer .social-media-title {
 /* Fim CSS botão WhatsApp */
 
 /* CSS home */
+
+#success-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 9rem;
+    z-index: 1;
+}
+
+.alert-success {
+    min-width: 50%;
+    text-align: center;
+}
 
 #carousel-home {
     margin-top: 7.4rem;
@@ -1538,9 +1552,17 @@ label {
         letter-spacing: 0.1rem;
     }
 
+    #cart-counter {
+        top: 3.5rem;
+    }
+
     /* Fim CSS header */
 
     /* CSS home */
+
+    #success-box {
+        top: 13rem;
+    }
 
     #carousel-home {
         margin-top: 9rem;

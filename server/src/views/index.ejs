@@ -2,6 +2,18 @@
 <%- include("./partials/header")%>
 
 <main>
+
+  <% if(success==="success"){ %>
+    <div id="success-box" >
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <form action="/success-session" method="POST">
+          <strong>Conta criada com sucesso.</strong>
+          <button type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </form>
+      </div>
+    </div>
+  <% } %> 
+
   <section id="carousel-home">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">

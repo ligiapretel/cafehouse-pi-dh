@@ -39,6 +39,7 @@ const indexController = {
                 newestProducts,
                 user: req.cookies.user,
                 cartCounter,
+                success: req.session.success,
             });
 
         }catch(error){

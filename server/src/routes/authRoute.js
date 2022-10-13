@@ -12,4 +12,7 @@ router.post("/registro", isGuest, authController.store);
 
 router.post("/logout", isAuth, authController.logout);
 
+router.post("/success-session", isGuest, authController.deleteSuccessSession);
+
+
 module.exports = router;

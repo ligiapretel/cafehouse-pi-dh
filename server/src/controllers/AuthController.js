@@ -18,6 +18,7 @@ const authController = {
           title: "criarConta",
           user: req.cookies.user,
           cartCounter,
+          success: req.session.success,
       });
     },
     //Processamento do cadastro do usuario
@@ -50,7 +51,8 @@ const authController = {
                     title: "Registro",
                     error: {
                         message: "Preencha todos os campos",
-                    }
+                    },
+                    cartCounter,
                     });
             }
     
@@ -59,7 +61,8 @@ const authController = {
               title: "Registro",
               error: {
                 message: "Senhas Divergentes",
-              }
+              },
+              cartCounter,
             });
           }
 
@@ -79,7 +82,10 @@ const authController = {
             }
           );
 
-          res.redirect("/")
+          // Criando uma sessão para exibir alerta de sucesso no redirecionamento
+          req.session.success = "success";
+
+          res.redirect("/");
     
         } catch (error) {
           return res.render("userRegister", {
@@ -163,6 +169,10 @@ const authController = {
         res.clearCookie("user");
         res.redirect("/");
     },
+    deleteSuccessSession: (req,res) =>{
+      delete req.session.success;
+      res.redirect("/");
+    }
 };
 
 module.exports = authController;
