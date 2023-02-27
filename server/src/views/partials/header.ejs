@@ -69,7 +69,7 @@
     </div>
     <a href="/carrinho">
         <div id="cart-counter">
-            <p><%= cartCounter %></p>
+            <p><%= cartCounter !== undefined ? cartCounter : 0 %></p>
         </div>
     </a>
     <section id="searchbar" class="col-12">

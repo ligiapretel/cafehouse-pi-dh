@@ -59,7 +59,10 @@
                   <p class="product-list-price">R$ <%= product.price.replace(".",",") %></p>
                 </a>
                 <form action="/carrinho/adicionar" method="POST">
-                  <input type="hidden" name="selectedItem" value="<%= product.id %>">
+                  <input type="hidden" name="selectedItemId" value="<%= product.id %>">
+                  <input type="hidden" name="selectedItemName" value="<%= product.name %>">
+                  <input type="hidden" name="selectedItemPrice" value="<%= product.price %>">
+                  <input type="hidden" name="selectedItemImage" value="<%= product.ImageProducts[0].name %>">
                   <button type="submit" class="btn-edit-forms col-12">Adicionar à sacola</button>
                 </form>
               </li>

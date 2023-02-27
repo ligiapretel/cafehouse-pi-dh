@@ -1,65 +1,46 @@
 <%- include("./partials/head")%>
 <%- include("./partials/header")%>
 
-<div class = "containerCurintia">
-    <div class="title-section title-section-login">
-        <h2>Carrinho de Compras</h2>
-    </div>
-    <div class = "cart">
-        <div class = "products">
-            <div class = "product">
-                <img src = "/img/img_produto5.jpg">
-                <div class = "product-info">
-                    <h3 class = "product-name">Novo Produto</h3>
-                    <h2 class = "product-price">R$ 29,99</h2>
-                    <h2 class = "product-offer">50%</h2>
-                    <p class = "product-quantity">Qnt : <input value = "1" name = "">
-                    <p class = "product-remove">
-                        <span class = "btn-edit-login">Remover</span>
-                    </p>
-                </div>
-            </div>
-            <div class = "product">
-                <img src = "/img/img_produto2.jpg">
-                <div class = "product-info">
-                    <h3 class = "product-name">Novo Produto</h3>
-                    <h2 class = "product-price">R$ 32,99</h2>
-                    <h2 class = "product-offer">30%</h2>
-                    <p class = "product-quantity">Qnt : <input value = "1" name = "">
-                    <p class = "product-remove">
-                        <span class = "btn-edit-login">Remover</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class = "cart-total">
-            <p>
-                <span>Total das Compras</span>
-                <span>R$ 62,98</span>
-            </p>
-            <p>
-                <span>Numero de Itens</span>
-                <span>2</span>
-            </p>
-            <p>
-                <span>Valor a Pagar</span>
-                <span>R$ 62,98</span>
-            </p>
-            <!-- <a href = "#">Finalizar Compra</a> -->
-        </div>
-</div>
-        <div class ="button">
-            <a href = "/produtos">
-                <button type="submit" id = "continuar" class = "btn-edit-forms" >Continuar Comprando</button>
-            </a>
-            <a href = "/checkout">
-                <button type="submit" id = "finalizar" class = "btn-edit-forms" >Finalizar Compras</button>
-            </a>
-        </div>
-    </div>      
-    </div>
-</div>
-</main>
+<main>
 
+    <section id="cart">
+        <div class="title-section title-section-login">
+            <h2>Itens na sacola</h2>
+        </div>
+        <% if (selectedItens!==undefined) { %>        
+            <% for(let item of selectedItens){ %>
+                <div class="cart-item">
+                    <div class="cart-item-img">
+                        <img src="/img/<%= item.image %>" alt="<%= item.name %>">
+                    </div>
+                    <div class="cart-item-details">
+                        <p><%= item.name %></p>
+                        <p>Preço: R$ <%= item.price.replace(".",",") %></p>
+                        <p>Quantidade: <%= item.quantity %></p>                  
+                    </div>
+                    <div class="cart-item-trash">
+                        <a href="">
+                            <img class="cart-item-trash-img" src="/img/trash_icon.svg" alt="Remover item">                  
+                        </a>
+                    </div>
+                </div>
+            <% } %> 
+            <div id="cart-buttons-container">
+                <a href="/checkout">
+                    <button type="button" class="btn-edit-forms cart-button col-12 col-md-6">Finalizar compra</button>
+                </a>
+                <a href="/produtos">
+                    <button type="button" class="btn-outline cart-button col-12 col-md-6">Continuar comprando</button>
+                </a>
+                <a href="/carrinho/esvaziar">
+                    <button type="button" class="btn-outline cart-button col-12 col-md-6">Esvaziar sacola</button>
+                </a>
+            </div>
+        <% } else {%>
+            <div id="empty-bag">
+                <h3>A sacola está vazia.</h3>  
+            </div>
+        <% } %>
+    </section>
 
 <%- include("./partials/footer")%>

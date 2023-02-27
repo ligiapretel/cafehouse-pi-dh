@@ -5,19 +5,11 @@ const bcrypt = require("../helpers/bcrypt");
 
 const authController = {
     //Tela para cadastro do usuario 
-    register: 
-    (req, res) => {
-
-      //Itens no carrinho
-      let cartCounter = 0;
-      if(req.session.cart !== undefined){
-          cartCounter = req.session.cart.length;
-      }  
-
+    register: (req, res) => { 
       return res.render("userRegister", {
           title: "criarConta",
           user: req.cookies.user,
-          cartCounter,
+          cartCounter: req.cookies.cartCounter,
           success: req.session.success,
       });
     },
@@ -25,12 +17,6 @@ const authController = {
     store: async (req, res) => {
         
         try {
-
-            //Itens no carrinho
-            let cartCounter = 0;
-            if(req.session.cart !== undefined){
-                cartCounter = req.session.cart.length;
-            }  
 
             const {
               nome,
@@ -52,8 +38,8 @@ const authController = {
                     error: {
                         message: "Preencha todos os campos",
                     },
-                    cartCounter,
-                    });
+                    cartCounter: req.cookies.cartCounter,
+                  });
             }
     
           if (senha !== confirmar_senha) {
@@ -62,7 +48,7 @@ const authController = {
               error: {
                 message: "Senhas Divergentes",
               },
-              cartCounter,
+              cartCounter: req.cookies.cartCounter,
             });
           }
 
@@ -93,34 +79,21 @@ const authController = {
             error: {
               message: "Erro na criação da conta",
             },
-            cartCounter,
+            cartCounter: req.cookies.cartCounter,
           });    
         }
       },
     //Tela para realizar o login
-    login: (req, res) => {
-
-        //Itens no carrinho
-        let cartCounter = 0;
-        if(req.session.cart !== undefined){
-            cartCounter = req.session.cart.length;
-        }  
-
+    login: (req, res) => {        
         return res.render("login", {
           title: "Login",
           user: req.cookies.user,
-          cartCounter,
+          cartCounter: req.cookies.cartCounter,
         });
     },
     //Processamento do login
     auth: async (req, res) => {
         try {
-
-          //Itens no carrinho
-          let cartCounter = 0;
-          if(req.session.cart !== undefined){
-              cartCounter = req.session.cart.length;
-          }  
 
           res.clearCookie("user");
           const {
@@ -140,7 +113,7 @@ const authController = {
               error: {
                 message: "Email e/ou senha inválidos"
               },
-              cartCounter,
+              cartCounter: req.cookies.cartCounter,
             });
           }
     
@@ -158,10 +131,10 @@ const authController = {
             error: {
               message: "Email e/ou senha inválidos"
             },
-            cartCounter,
+            cartCounter: req.cookies.cartCounter,
           });
         }
-      },
+    },
     //Processamento do deslogar
     logout: (req, res) => {
 

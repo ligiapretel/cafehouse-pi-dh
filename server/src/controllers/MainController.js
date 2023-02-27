@@ -6,13 +6,7 @@ const indexController = {
     index: async (req,res)=>{
 
         try{
-
-            // Verificar se a session cart está setada. Se sim, verificar a quantidade de itens, senão, quantidade será 0
-            let cartCounter = 0;
-            if(req.session.cart !== undefined){
-                cartCounter = req.session.cart.length;
-            }        
-
+  
             const bestSellerProducts = await Product.findAll({
                 where: {
                     active: 1,
@@ -38,7 +32,7 @@ const indexController = {
                 bestSellerProducts,
                 newestProducts,
                 user: req.cookies.user,
-                cartCounter,
+                cartCounter: req.cookies.cartCounter,
                 success: req.session.success,
             });
 
@@ -54,41 +48,26 @@ const indexController = {
     },
     about: (req,res)=>{
 
-        let cartCounter = 0;
-        if(req.session.cart !== undefined){
-            cartCounter = req.session.cart.length;
-        }
-
         return res.render("about",{
             title:"Sobre Nós",
             user: req.cookies.user,
-            cartCounter,
+            cartCounter: req.cookies.cartCounter,
         });
     },
-    blog: (req,res)=>{
-
-        let cartCounter = 0;
-        if(req.session.cart !== undefined){
-            cartCounter = req.session.cart.length;
-        }
+    blog: (req,res)=>{       
 
         return res.render("blog",{
             title:"Blog",
             user: req.cookies.user,
-            cartCounter,
+            cartCounter: req.cookies.cartCounter,
         });
     },
     contact: (req,res)=>{
 
-        let cartCounter = 0;
-        if(req.session.cart !== undefined){
-            cartCounter = req.session.cart.length;
-        }
-
         return res.render("contact",{
             title:"Contato",
             user: req.cookies.user,
-            cartCounter,
+            cartCounter: req.cookies.cartCounter,
         });
     }
 };

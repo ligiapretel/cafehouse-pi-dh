@@ -16,12 +16,6 @@ const userPanelController = {
                     { model: ImageUser },
                 ]
             });   
-            
-            //Itens no carrinho
-            let cartCounter = 0;
-            if(req.session.cart !== undefined){
-                cartCounter = req.session.cart.length;
-            }  
 
             //Verificando se existe algum usuário, se não existir, renderiza a view error
             if(!userData){
@@ -29,7 +23,7 @@ const userPanelController = {
                     title: "Ops!",
                     message: "Usuário não encontrado.",
                     user: req.cookies.user,
-                    cartCounter,
+                    cartCounter: req.cookies.cartCounter,
                 });
             }
 
@@ -37,7 +31,7 @@ const userPanelController = {
                 title: "Minha conta",
                 userData,
                 user: req.cookies.user,
-                cartCounter,
+                cartCounter: req.cookies.cartCounter,
             });
 
         }catch(error){
@@ -45,7 +39,7 @@ const userPanelController = {
                 title: "Ops!",
                 message: "Usuário não encontrado.",
                 user: req.cookies.user,
-                cartCounter,
+                cartCounter: req.cookies.cartCounter,
             });
         }
     },
@@ -61,19 +55,13 @@ const userPanelController = {
                     { model: ImageUser },
                 ]
             });   
-            
-            //Itens no carrinho
-            let cartCounter = 0;
-            if(req.session.cart !== undefined){
-                cartCounter = req.session.cart.length;
-            }  
 
             if(!userData){
                 return res.render("error", {
                     title: "Ops!",
                     message: "Usuário não encontrado.",
                     user: req.cookies.user,
-                    cartCounter,
+                    cartCounter: req.cookies.cartCounter,
                 });
             }
 
@@ -81,7 +69,7 @@ const userPanelController = {
                 title: "Minha conta",
                 userData,
                 user: req.cookies.user,
-                cartCounter,
+                cartCounter: req.cookies.cartCounter,
             }); 
 
         }catch(error){
@@ -89,45 +77,27 @@ const userPanelController = {
                 title: "Ops!",
                 message: "Erro na exibição dos dados.",
                 user: req.cookies.user,
-                cartCounter,
+                cartCounter: req.cookies.cartCounter,
             });
         }       
     },
     myRequests: (req,res)=>{
 
-        //Itens no carrinho
-        let cartCounter = 0;
-        if(req.session.cart !== undefined){
-            cartCounter = req.session.cart.length;
-        }  
-
-        return res.render("myRequests",{
+         return res.render("myRequests",{
             title:"Meus Pedidos",
             user: req.cookies.user,
-            cartCounter,
+            cartCounter: req.cookies.cartCounter,
         });
     },
     myAddresses: (req,res)=>{
 
-        //Itens no carrinho
-        let cartCounter = 0;
-        if(req.session.cart !== undefined){
-            cartCounter = req.session.cart.length;
-        }  
-
         return res.render("address",{
             title:"Meus Endereços",
             user: req.cookies.user,
-            cartCounter,
+            cartCounter: req.cookies.cartCounter,
         });
     },
     createMyAddresses: (req,res)=>{
-
-        //Itens no carrinho
-        let cartCounter = 0;
-        if(req.session.cart !== undefined){
-            cartCounter = req.session.cart.length;
-        }  
 
         const usersJson = fs.readFileSync(
             //Caminho do arquivo
@@ -147,45 +117,34 @@ const userPanelController = {
         if (!apelido || 
             !cep || 
             !endereco ||
-             !numero || 
-             !complemento ||
-              !bairro ||
-               !cidade || 
-               !estado || 
-               !destinatario)
-               {
-                return res.render("/", {message: "preencha todos os campos", cartCounter})
+            !numero || 
+            !complemento ||
+            !bairro ||
+            !cidade || 
+            !estado || 
+            !destinatario){
+                return res.render("/", {
+                    message: "preencha todos os campos", 
+                    cartCounter: req.cookies.cartCounter,
+                })
         }
 
-
-        
         const newAdress = {apelido, cep, endereco, numero, complemento,bairro,cidade, estado, destinatario}
 
         personalUser.enderecos.push(newAdress);
 
-        
-        console.log(users);
-
-        // console.log(personalUser);
-
         return res.render("userPanel", {
             title: "Minha conta",
             user: personalUser,
-            cartCounter,
+            cartCounter: req.cookies.cartCounter,
         });
     },
     changePassword: (req,res)=>{
 
-        //Itens no carrinho
-        let cartCounter = 0;
-        if(req.session.cart !== undefined){
-            cartCounter = req.session.cart.length;
-        }  
-
         return res.render("changePassword",{
             title:"Alterar Senha",
             user: req.cookies.user,
-            cartCounter
+            cartCounter: req.cookies.cartCounter,
         });
     },
 };

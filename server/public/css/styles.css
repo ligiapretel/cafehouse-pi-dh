@@ -37,6 +37,17 @@ img {
     transition: all 0.2s ease-in 0.1s;
 }
 
+.btn-outline {
+    background-color: #fff;
+    padding: 10px 20px;
+    border: #772014 1px solid;
+    border-radius: 10px;
+    color: #772014;
+    font-size: 0.8rem;
+    letter-spacing: 0.2rem;
+    transition: all 0.2s ease-in 0.1s;
+}
+
 .btn-edit{
     align-self: center;
 }
@@ -54,6 +65,11 @@ img {
 
 .btn-edit-forms:hover, .btn-edit-login:hover {
     background-color: #AF4319;
+}
+
+.btn-outline:hover {
+    background-color: #AF4319;
+    color: #fff;
 }
 
 .underline-hover:hover {
@@ -361,7 +377,7 @@ footer .social-media-title {
 
 .product-img {
     border: 1px solid #707070;
-    min-height: 352px;
+    min-height: 260px;
     display: flex;
     align-items: center;
 }
@@ -564,116 +580,69 @@ footer .social-media-title {
 }
 /* Fim CSS login */
 
-/* inicio CSS carrinho de compras */
+/* Início CSS cart */
 
-.containerCurintia {
-   margin-top: 200px;
-   margin-left: 75px;
-    max-width: 1200px;
-    margin-bottom: 0 auto;
-}
-
-.containerCurintia > h1 {
-    padding: 20px 0;
-
-}
-
-.cart {
+#cart {
     display: flex;
-}
-
-.products {
-    flex: 1.05;
-}
-
-.product {
-    display: flex;
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    border: 1px solid silver;
-}
-
-
-.product > img {
-    width: 300px;
-    height: 200px;
-    object-fit: cover;
-}
-
-.product > img:hover {
-    transform: scale(1.04);
-}
-
-.product-info {
-    padding: 20px;
-    width: 100%; 
-    position: relative;  
-}
-
-.product-name, .product-price, .product-offer {
-    margin-bottom: 20px;
-}
-
-.product-remove {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 25px;
-    cursor: pointer;
-    border-radius: 5px;  
-}
-
-.product-quantity > input {
-    width: 40px;
-    padding: 5px;
-    text-align: center;
-
-}
-
-div.button {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
-    margin-bottom: 25px;
+    padding: 8rem 1rem 2rem 1rem;
+    color: #707070;
+    letter-spacing: 0.1rem;
+    font-size: 0.8rem;
 }
 
-#continuar {
-    margin-right: 50px;
-    
-}
-
-.cart-total {
-    flex: 0.25;
-    margin-left: 20px;
-    margin-right: 60px;
-    padding: 20px;
-    height: 240px;
-    border: 1px solid silver;
-    border-radius: 5px;
-}
-
-.cart-total p {
+.cart-item {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    font-size: 20px;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 2rem;
+    background-color: #F2EDEA;
+    padding: 0.5rem;
 }
 
-.cart-total a {
-    display: block;
-    text-align: center;
-    height: 40px;
-    background-color: #772014;
-    color: white;
-    text-decoration: none; 
+.cart-item-img {
+    width: 25%;
+    border: 1px solid #707070;
 }
 
-.cart-total a:hover {
-    background-color: #3F220F;
+.cart-item-details {
+    width: 70%;
+    padding-left: 0.5rem;
 }
 
-/* fim css carrinho de compras */
+.cart-item-details p{
+    margin: 0;
+}
+
+.cart-item-details :first-child{
+    font-weight: bold;
+}
+
+.cart-item-trash {
+    align-self: end;
+    width: 5%;
+}
+
+.cart-item-trash-img {
+    width: 20px;
+}
+
+#cart-buttons-container {
+    padding: 2rem;
+}
+
+#cart-buttons-container a{
+    display: flex;
+    justify-content: center;
+}
+
+.cart-button {
+    margin-bottom: 2rem;
+}
+
+
+/* Fim css cart */
 
 /* CSS cadastro */
 
@@ -1424,11 +1393,11 @@ label {
     padding: 3rem 0 2rem 0;
 }
 
-#error-search {
+#error-search, #empty-bag {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 3rem 1rem 2rem 1rem;
+    padding: 3rem 1rem 6rem 1rem;
     text-align: center;
     color: #772014;
     letter-spacing: 0.1rem;
@@ -1628,6 +1597,35 @@ label {
 
     /* Fim CSS listagem de produto */
 
+    /* Início CSS cart */
+
+#cart {
+    font-size: 1rem;
+}
+
+.cart-item-img {
+    max-width: 172px;
+}
+
+.cart-item-img img{
+    max-width: 170px;
+}
+
+.cart-item-details {
+    padding-left: 1.5rem;
+}
+
+.cart-item-details p{
+    margin-bottom: 0.5rem;
+}
+
+.cart-item-trash-img {
+    width: 25px;
+}
+
+
+/* Fim css cart */
+
     /* CSS login */
 
     #container-main-login {
@@ -1788,7 +1786,7 @@ label {
 
     /* CSS about */
 
-    #about-company, #blog-section {
+    #about-company, #blog-section, #cart {
         padding: 10rem 2rem 2rem 2rem;
     }
 
@@ -1817,7 +1815,7 @@ label {
 
     /* CSS about */
 
-    #about-company {
+    #about-company, #blog-section {
         flex-direction: row;
         flex-wrap: wrap;
         padding: 11rem 2rem 4rem 2rem;
@@ -1832,6 +1830,14 @@ label {
     }
 
     /* Fim CSS about */
+
+     /* CSS cart */
+
+     #cart {
+        padding: 11rem 2rem 4rem 2rem;
+    }
+
+    /* Fim CSS cart */
 
      /* CSS Product*/
 

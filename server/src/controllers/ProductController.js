@@ -47,7 +47,6 @@ const productController = {
             }
             /* se o produto está ativo, faz essa condição */
             /* busca pelo nome, mas o like ajuda a procurar apenas um pedaço do nome, e não o nome inteiro */
-            /* consertar a parte do coffee++ */
             if(search){
                 whereProduct.name = {
                     [Op.like]: `%${search}%`
@@ -75,12 +74,6 @@ const productController = {
                 ]
             });
 
-            //Itens no carrinho
-            let cartCounter = 0;
-            if(req.session.cart !== undefined){
-                cartCounter = req.session.cart.length;
-            }  
-
             return res.render("productListing", {
                 title: "Produtos",
                 products,
@@ -88,7 +81,7 @@ const productController = {
                 categories,
                 totalPages,
                 user: req.cookies.user,
-                cartCounter,
+                cartCounter: req.cookies.cartCounter,
             });
 
         } catch (error) {
@@ -96,7 +89,7 @@ const productController = {
                 title: "Ops!",
                 message: "Erro na exibição dos produtos.",
                 user: req.cookies.user,
-                cartCounter,
+                cartCounter: req.cookies.cartCounter,
             });
         }
 
@@ -116,12 +109,6 @@ const productController = {
                     { model: ImageProduct },
                 ]
             });
-
-            //Itens no carrinho
-            let cartCounter = 0;
-            if(req.session.cart !== undefined){
-                cartCounter = req.session.cart.length;
-            }
             
             // Se não existir, renderiza a view error mostrando a mensagem 
             if (!product) {
@@ -129,7 +116,7 @@ const productController = {
                     title: "Ops!",
                     message: "Produto não encontrado.",
                     user: req.cookies.user,
-                    cartCounter,
+                    cartCounter: req.cookies.cartCounter,
                 });
             };
            
@@ -138,7 +125,7 @@ const productController = {
                 title: "Detalhe do Produto",
                 product,
                 user: req.cookies.user,
-                cartCounter,
+                cartCounter: req.cookies.cartCounter,
             });
 
         }catch(error){
@@ -146,7 +133,7 @@ const productController = {
                     title: "Ops!",
                     message: "Erro na exibição do produto.",
                     user: req.cookies.user,
-                    cartCounter,
+                    cartCounter: req.cookies.cartCounter,
                 });
         }
     },
