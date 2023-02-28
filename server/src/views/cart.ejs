@@ -15,7 +15,7 @@
                     </div>
                     <div class="cart-item-details">
                         <p><%= item.name %></p>
-                        <p>Preço: R$ <%= item.price.replace(".",",") %></p>
+                        <p>Preço: <%= parseFloat(item.price).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
                         <p>Quantidade: <%= item.quantity %></p>                  
                     </div>
                     <div class="cart-item-trash">

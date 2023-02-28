@@ -69,7 +69,8 @@
     </div>
     <a href="/carrinho">
         <div id="cart-counter">
-            <p><%= cartCounter !== undefined ? cartCounter : 0 %></p>
+            <!-- Se existir a variável cartCounter sendo passada, exiba o valor dela, senão, exiba 0 -->
+            <p><%= (locals.cartCounter) ? cartCounter : 0 %></p>
         </div>
     </a>
     <section id="searchbar" class="col-12">
