@@ -49,11 +49,35 @@ const cartController = {
         // console.log(req.session.cart);
         res.redirect("/carrinho");
     },
+    removeCart: (req,res) => {
+        // Recebendo id do produto a ser removido
+        const { id } = req.params;
+        // Verifica se existe produto no carrinho
+        if(req.session.cart !== undefined){
+            // Se sim, filtra o carrinho de acordo com o item passado pela url
+            const itemToBeRemoved = req.session.cart.find(item=>item.id == id);
+            
+            // Se a quantidade do item for maior que 1, decremento em 1 unidade
+            if(itemToBeRemoved.quantity > 1){
+                itemToBeRemoved.quantity--
+            }else if(itemToBeRemoved.quantity == 1 && req.session.cart.length > 1 ){
+                // Se for igual a 1, precisarei encontrar qual a posição do item para removê-lo 
+                const itemIndex = req.session.cart.findIndex(item=>item.id == id);
+                req.session.cart.splice(itemIndex,1);
+            }else{
+                // Se for o último item do carrinho, redireciono para a rota que limpa a session
+                res.redirect("/carrinho/esvaziar");
+            }
+        }
+
+        res.redirect("/carrinho");
+
+    },
     resetCart: (req,res)=>{
         delete req.session.cart;
         res.clearCookie("cartCounter");
         res.redirect("/carrinho");
-    }
+    },    
 };
 
 module.exports = cartController;
