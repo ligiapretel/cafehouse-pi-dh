@@ -1,8 +1,12 @@
 const cartController = {
     index: (req,res) => {
 
+        let totalPrice = 0;
+        let freight = 0;
         let cartCounter = 0;
         if(req.session.cart !== undefined){
+            totalPrice = req.session.cart.reduce((result, product) => { return result + parseFloat(product.total); }, 0);
+            freight = 10;
             cartCounter = req.session.cart.reduce((result, product) => { return result + product.quantity; }, 0);
             // Criando cookie da sessão
             res.cookie("cartCounter", cartCounter);
@@ -11,6 +15,8 @@ const cartController = {
         return res.render("cart",{
             title:"Carrinho",
             user: req.cookies.user,
+            totalPrice,
+            freight,
             cartCounter,
             selectedItens: req.session.cart,
         });
@@ -22,10 +28,11 @@ const cartController = {
         // Verificar se existe item no carrinho, caso exista, adicione mais um ao array, senão, cria um array
         if(req.session.cart !== undefined){
 
-            const productInCart = req.session.cart.find(item => item.id == selectedItemId)
+            const productInCart = req.session.cart.find(item => parseInt(item.id) === parseInt(selectedItemId));
             
             if(productInCart !== undefined){
-                productInCart.quantity += 1;                
+                productInCart.quantity += 1;
+                productInCart.total = selectedItemPrice * productInCart.quantity;           
             }else{
                 req.session.cart.push({
                     id:selectedItemId, 
@@ -33,6 +40,7 @@ const cartController = {
                     price:selectedItemPrice,
                     image:selectedItemImage,
                     quantity: 1,
+                    total: selectedItemPrice,
                 });
             }            
 
@@ -43,6 +51,7 @@ const cartController = {
                 price:selectedItemPrice,
                 image: selectedItemImage,
                 quantity: 1,
+                total: selectedItemPrice,
             }];
             
         }

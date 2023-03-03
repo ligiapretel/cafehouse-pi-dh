@@ -15,8 +15,10 @@
                     </div>
                     <div class="cart-item-details">
                         <p><%= item.name %></p>
-                        <p>Preço: <%= parseFloat(item.price).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
-                        <p>Quantidade: <%= item.quantity %></p>                  
+                        <p>Preço unitário: <%= parseFloat(item.price).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                        <p>Quantidade: <%= item.quantity %></p> 
+                        <p>Total: <%= parseFloat(item.total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>                  
+
                     </div>
                     <div class="cart-item-trash">
                         <a href="/carrinho/<%= item.id %>/remover">
@@ -24,7 +26,22 @@
                         </a>
                     </div>
                 </div>
-            <% } %> 
+                <% } %> 
+            <div>
+                <h3>Resumo do Pedido</h3>
+                <div>
+                    <h4>Subtotal:</h4>
+                    <p><%= totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                </div>
+                <div>
+                    <h4>Frete:</h4>
+                    <p><%= freight.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                </div>
+                <div>
+                    <h4>Total:</h4>
+                    <p><%= (freight + totalPrice).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                </div>
+            </div>
             <div id="cart-buttons-container">
                 <a href="/checkout">
                     <button type="button" class="btn-edit-forms cart-button col-12 col-md-6">Finalizar compra</button>
