@@ -41,7 +41,7 @@ const indexController = {
                 title: "Ops!",
                 message: "Erro na exibição da página.",
                 user: req.cookies.user,
-                cartCounter,
+                cartCounter: req.cookies.cartCounter,
             });
         }
 

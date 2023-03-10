@@ -2,8 +2,11 @@
   "name": "projetoe-commerce",
   "version": "1.0.0",
   "main": "index.js",
+  "nodemonConfig": {
+    "ignore": ["data/*.json"]
+  },
   "scripts": {
-    "start": "nodemon app && --ignore data"
+    "start": "nodemon app"
   },
   "repository": {
     "type": "git",

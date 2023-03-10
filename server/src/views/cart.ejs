@@ -16,6 +16,12 @@
                     <div class="cart-item-details">
                         <p><%= item.name %></p>
                         <p>Preço unitário: <%= parseFloat(item.price).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                        <div>
+                            <button class="decrement"> - </button>
+                            <input type="number" class="quantity-btn" min="1" max="20" step="1" value="<%= item.quantity %>" data-id="<%= item.id %>" readonly>
+                            <button class="increment"> + </button>
+                        </div>
+                        
                         <p>Quantidade: <%= item.quantity %></p> 
                         <p>Total: <%= parseFloat(item.total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>                  
 

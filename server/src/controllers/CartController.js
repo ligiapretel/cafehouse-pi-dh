@@ -1,6 +1,7 @@
 const cartController = {
     index: (req,res) => {
-
+        // definir o cabeçalho HTTP Cache-Control para evitar o armazenamento em cache da página
+        
         let totalPrice = 0;
         let freight = 0;
         let cartCounter = 0;
@@ -11,7 +12,8 @@ const cartController = {
             // Criando cookie da sessão
             res.cookie("cartCounter", cartCounter);
         }
-
+        
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');    
         return res.render("cart",{
             title:"Carrinho",
             user: req.cookies.user,
@@ -57,6 +59,19 @@ const cartController = {
         }
         // console.log(req.session.cart);
         res.redirect("/carrinho");
+    },
+    updateQuantity: (req,res)=>{
+        const { id } = req.params;
+        const { quantity } = req.body;
+        
+        if(req.session.cart !== undefined){
+            const productInCart = req.session.cart.find(item => parseInt(item.id) === parseInt(id));
+            productInCart.quantity = quantity;
+            productInCart.total = productInCart.price * productInCart.quantity; 
+            console.log(req.session.cart);    
+        }
+        return res.redirect("/carrinho");        
+        
     },
     removeCart: (req,res) => {
         // Recebendo id do produto a ser removido
