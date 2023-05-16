@@ -1,6 +1,5 @@
 const cartController = {
     index: (req,res) => {
-        // definir o cabeçalho HTTP Cache-Control para evitar o armazenamento em cache da página
         
         let totalPrice = 0;
         let freight = 0;
@@ -12,8 +11,7 @@ const cartController = {
             // Criando cookie da sessão
             res.cookie("cartCounter", cartCounter);
         }
-        
-        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');    
+          
         return res.render("cart",{
             title:"Carrinho",
             user: req.cookies.user,
@@ -57,7 +55,6 @@ const cartController = {
             }];
             
         }
-        // console.log(req.session.cart);
         res.redirect("/carrinho");
     },
     updateQuantity: (req,res)=>{
@@ -76,25 +73,22 @@ const cartController = {
     removeCart: (req,res) => {
         // Recebendo id do produto a ser removido
         const { id } = req.params;
+
         // Verifica se existe produto no carrinho
         if(req.session.cart !== undefined){
-            // Se sim, filtra o carrinho de acordo com o item passado pela url
-            const itemToBeRemoved = req.session.cart.find(item=>item.id == id);
-            
-            // Se a quantidade do item for maior que 1, decremento em 1 unidade
-            if(itemToBeRemoved.quantity > 1){
-                itemToBeRemoved.quantity--
-            }else if(itemToBeRemoved.quantity == 1 && req.session.cart.length > 1 ){
-                // Se for igual a 1, precisarei encontrar qual a posição do item para removê-lo 
+             
+            // Se existirem outros produtos no carrinho, precisarei encontrar qual a posição do item para removê-lo 
+           if(req.session.cart.length > 1 ){
                 const itemIndex = req.session.cart.findIndex(item=>item.id == id);
-                req.session.cart.splice(itemIndex,1);
+                req.session.cart.splice(itemIndex,1);            
+
             }else{
                 // Se for o último item do carrinho, redireciono para a rota que limpa a session
-                res.redirect("/carrinho/esvaziar");
+                return res.redirect("/carrinho/esvaziar");
             }
         }
 
-        res.redirect("/carrinho");
+        return res.redirect("/carrinho");
 
     },
     resetCart: (req,res)=>{

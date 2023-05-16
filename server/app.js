@@ -31,7 +31,7 @@ app.use(cookieParser());
 // Configuração do express-session
 app.use(session({ 
   secret: "Cafe House",
-  resave: true,
+  resave: false,
   saveUninitialized: false 
 }));
     

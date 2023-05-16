@@ -100,20 +100,21 @@ const productController = {
 
             
             // Armazenando todas as informações que virão pelo req no validationResult
-            const {errors} = validationResult(req);
+            const errors = validationResult(req);
             
             // Se existirem erros, renderiza a view com os erros formatados
-            if(errors.length>0) {
+            if(!errors.isEmpty()) {
                 
                 let fileMessage;
                 if(!req.file){
                     fileMessage = "Insira a foto do produto";
                 }
                 
-                const formattedErrors = {}
-                errors.forEach(error => {
-                    formattedErrors[error.param] = error.msg;
-                });
+                // const formattedErrors = {}
+                // errors.forEach(error => {
+                //     formattedErrors[error.param] = error.msg;
+                // });
+                // console.log(formattedErrors);
                 
                 const brands = await Brand.findAll();
     
@@ -121,7 +122,7 @@ const productController = {
 
                 return res.render("admin/productCreateForm",{
                     title:"Cadastro de Produto",
-                    errors: formattedErrors,
+                    errors: errors.mapped(),
                     fileMessage,
                     old: req.body,
                     brands,

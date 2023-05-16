@@ -9,7 +9,7 @@
         </div>
         <% if (selectedItens!==undefined) { %>        
             <% for(let item of selectedItens){ %>
-                <div class="cart-item">
+                <div class="cart-item" data-id="<%= item.id %>">
                     <div class="cart-item-img">
                         <img src="/img/<%= item.image %>" alt="<%= item.name %>">
                     </div>
@@ -27,9 +27,11 @@
 
                     </div>
                     <div class="cart-item-trash">
-                        <a href="/carrinho/<%= item.id %>/remover">
-                            <img class="cart-item-trash-img" src="/img/trash_icon.svg" alt="Remover item">                  
-                        </a>
+                        <!-- <a href="/carrinho/<%= //item.id %>/remover" class="trash"> -->
+                            <button class="trash-btn">
+                                <img class="cart-item-trash-img" src="/img/trash_icon.svg" alt="Remover item">                  
+                            </button>
+                        <!-- </a> -->
                     </div>
                 </div>
                 <% } %> 

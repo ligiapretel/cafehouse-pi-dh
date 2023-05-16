@@ -15,7 +15,7 @@
                         <label for="name">Nome do Produto</label>                       
                         <input class="form-control" class="form-control" type="text" name="name" id="name" placeholder="Produto" value="<%= locals.old ? old.name : '' %>">
                         <% if (locals.errors && errors.name) { %>
-                            <p class="alert-form"> <%= errors.name %> </p>
+                            <p class="alert-form"> <%= errors.name.msg %> </p>
                         <% } %>
                     </div>
 
@@ -36,7 +36,7 @@
                             <% }) %>
                         </select>
                         <% if (locals.errors && errors.brand) { %>
-                            <p class="alert-form"> <%= errors.brand %> </p>
+                            <p class="alert-form"> <%= errors.brand.msg %> </p>
                         <% } %>
                     </div>
                    
@@ -44,7 +44,7 @@
                         <label for="flavor">Sabor</label>
                         <input class="form-control" class="form-control" type="text" name="flavor" id="flavor" placeholder="Sabor" value="<%= locals.old ? old.flavor : '' %>">
                         <% if (locals.errors && errors.flavor) { %>
-                            <p class="alert-form"> <%= errors.flavor %> </p>
+                            <p class="alert-form"> <%= errors.flavor.msg %> </p>
                         <% } %>
                     </div>
                     
@@ -52,7 +52,7 @@
                         <label for="roast">Torra</label>
                         <input class="form-control" type="text" name="roast" id="roast" placeholder="Torra" value="<%= locals.old ? old.roast : '' %>">
                         <% if (locals.errors && errors.roast) { %>
-                            <p class="alert-form"> <%= errors.roast %> </p>
+                            <p class="alert-form"> <%= errors.roast.msg %> </p>
                         <% } %>
                     </div>
                     
@@ -60,7 +60,7 @@
                         <label class="form-label" for="description">Descrição do produto</label>
                         <textarea class="form-control" name="description" id="description" cols="30" rows="10" placeholder="Descrição"><%= locals.old ? old.description : '' %></textarea>
                         <% if (locals.errors && errors.description) { %>
-                            <p class="alert-form"> <%= errors.description %> </p>
+                            <p class="alert-form"> <%= errors.description.msg %> </p>
                         <% } %>
                     </div>
                    
@@ -68,7 +68,7 @@
                         <label for="content">Conteúdo da Embalagem</label>
                         <input class="form-control" type="text" name="content" id="content" placeholder="Conteúdo da embalagem" value="<%= locals.old ? old.content : '' %>">
                         <% if (locals.errors && errors.content) { %>
-                            <p class="alert-form"> <%= errors.content %></p>
+                            <p class="alert-form"> <%= errors.content.msg %></p>
                         <% } %>
                     </div>
                     
@@ -76,7 +76,7 @@
                         <label for="format">Formato</label>
                         <input class="form-control" type="text" name="format" id="format" placeholder="Formato do produto" value="<%= locals.old ? old.format : '' %>">
                         <% if (locals.errors && errors.format) { %>
-                            <p class="alert-form"> <%= errors.format %></p>
+                            <p class="alert-form"> <%= errors.format.msg %></p>
                         <% } %>
                     </div>
 
@@ -84,7 +84,7 @@
                         <label for="price">Preço</label>
                         <input class="form-control" type="text" name="price" id="price" placeholder="Preço" value="<%= locals.old ? old.price : '' %>">
                         <% if (locals.errors && errors.price) { %>
-                            <p class="alert-form"> <%= errors.price %></p>
+                            <p class="alert-form"> <%= errors.price.msg %></p>
                         <% } %>
                     </div>
                     
@@ -97,7 +97,7 @@
                             <option value="3" <% if (locals.old && old.installment == "3") { %> selected <% } %>>3</option>
                         </select>
                         <% if (locals.errors && errors.installment) { %>
-                            <p class="alert-form"> <%= errors.installment %></p>
+                            <p class="alert-form"> <%= errors.installment.msg %></p>
                         <% } %>
                     </div>
                     
@@ -105,7 +105,7 @@
                         <label for="sku">Código</label>
                         <input class="form-control" type="text" name="sku" id="sku" placeholder="Código" value="<%= locals.old ? old.sku : '' %>">
                         <% if (locals.errors && errors.sku) { %>
-                            <p class="alert-form"> <%= errors.sku %></p>
+                            <p class="alert-form"> <%= errors.sku.msg %></p>
                         <% } %>
                     </div>
 
@@ -113,7 +113,7 @@
                         <label for="quantity">Quantidade em Estoque</label>
                         <input class="form-control" type="text" name="quantity" id="quantity" placeholder="Quantidade em estoque" value="<%= locals.old ? old.quantity : '' %>">
                         <% if (locals.errors && errors.quantity) { %>
-                            <p class="alert-form"> <%= errors.quantity %> </p>
+                            <p class="alert-form"> <%= errors.quantity.msg %> </p>
                         <% } %>
                     </div>
 
@@ -126,7 +126,7 @@
                             <% }) %>
                         </select>
                         <% if (locals.errors && errors.category) { %>
-                            <p class="alert-form"> <%= errors.category %> </p>
+                            <p class="alert-form"> <%= errors.category.msg %> </p>
                         <% } %>
                     </div>
 
@@ -138,7 +138,7 @@
                             <option value="0" <% if (locals.old && old.active == "0") { %> selected <% } %>>Não</option>
                         </select>
                         <% if (locals.errors && errors.active) { %>
-                            <p class="alert-form"> <%= errors.active %> </p>
+                            <p class="alert-form"> <%= errors.active.msg %> </p>
                         <% } %>
                     </div>
                     
