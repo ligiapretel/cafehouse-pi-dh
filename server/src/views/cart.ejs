@@ -4,63 +4,62 @@
 <main>
 
     <section id="cart">
-        <div class="title-section title-section-login">
+        <div class="title-section">
             <h2>Itens na sacola</h2>
         </div>
-        <% if (selectedItens!==undefined) { %>        
-            <% for(let item of selectedItens){ %>
-                <div class="cart-item" data-id="<%= item.id %>">
-                    <div class="cart-item-img">
-                        <img src="/img/<%= item.image %>" alt="<%= item.name %>">
-                    </div>
-                    <div class="cart-item-details">
-                        <p><%= item.name %></p>
-                        <p>Preço unitário: <%= parseFloat(item.price).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
-                        <div>
-                            <button class="decrement"> - </button>
-                            <input type="number" class="quantity-btn" min="1" max="20" step="1" value="<%= item.quantity %>" data-id="<%= item.id %>" readonly>
-                            <button class="increment"> + </button>
+        <% if (selectedItens!==undefined) { %> 
+            <section id="cart-items">
+                <% for(let item of selectedItens){ %>
+                    <div class="cart-item" data-id="<%= item.id %>">
+                        <div class="cart-item-img">
+                            <img src="/img/<%= item.image %>" alt="<%= item.name %>">
                         </div>
-                        
-                        <p>Quantidade: <%= item.quantity %></p> 
-                        <p>Total: <%= parseFloat(item.total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>                  
-
+                        <div class="cart-item-details">
+                            <p><%= item.name %></p>
+                            <p>Preço unitário: <%= parseFloat(item.price).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                            <div>
+                                <button class="decrement"> - </button>
+                                <input type="number" class="quantity-btn" min="1" max="20" step="1" value="<%= item.quantity %>" data-id="<%= item.id %>" readonly>
+                                <button class="increment"> + </button>
+                            </div>
+                            <p>Total: <%= parseFloat(item.total).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>                  
+                        </div>
+                        <div class="cart-item-trash">
+                                <button class="trash-btn">
+                                    <img class="cart-item-trash-img" src="/img/trash_icon.svg" alt="Remover item">                  
+                                </button>
+                        </div>
                     </div>
-                    <div class="cart-item-trash">
-                        <!-- <a href="/carrinho/<%= //item.id %>/remover" class="trash"> -->
-                            <button class="trash-btn">
-                                <img class="cart-item-trash-img" src="/img/trash_icon.svg" alt="Remover item">                  
-                            </button>
-                        <!-- </a> -->
+                <% } %>
+            </section>
+            <section id="purchase-container">
+                <div id="purchase">
+                    <h3 class="purchase-title">Resumo do Pedido</h3>
+                    <div>
+                        <h4>Subtotal</h4>
+                        <p><%= totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                    </div>
+                    <div>
+                        <h4>Frete</h4>
+                        <p><%= freight.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                    </div>
+                    <div>
+                        <h4>Total</h4>
+                        <p><%= (freight + totalPrice).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
                     </div>
                 </div>
-                <% } %> 
-            <div>
-                <h3>Resumo do Pedido</h3>
-                <div>
-                    <h4>Subtotal:</h4>
-                    <p><%= totalPrice.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
+                <div id="cart-buttons-container">
+                    <a href="/checkout">
+                        <button type="button" class="btn-edit-forms cart-button col-12 col-md-6">Finalizar compra</button>
+                    </a>
+                    <a href="/produtos">
+                        <button type="button" class="btn-outline cart-button col-12 col-md-6">Continuar comprando</button>
+                    </a>
+                    <a href="/carrinho/esvaziar">
+                        <button type="button" class="btn-outline cart-button col-12 col-md-6">Esvaziar sacola</button>
+                    </a>
                 </div>
-                <div>
-                    <h4>Frete:</h4>
-                    <p><%= freight.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
-                </div>
-                <div>
-                    <h4>Total:</h4>
-                    <p><%= (freight + totalPrice).toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) %></p>
-                </div>
-            </div>
-            <div id="cart-buttons-container">
-                <a href="/checkout">
-                    <button type="button" class="btn-edit-forms cart-button col-12 col-md-6">Finalizar compra</button>
-                </a>
-                <a href="/produtos">
-                    <button type="button" class="btn-outline cart-button col-12 col-md-6">Continuar comprando</button>
-                </a>
-                <a href="/carrinho/esvaziar">
-                    <button type="button" class="btn-outline cart-button col-12 col-md-6">Esvaziar sacola</button>
-                </a>
-            </div>
+            </section>
         <% } else {%>
             <div id="empty-bag">
                 <h3>A sacola está vazia.</h3>  
