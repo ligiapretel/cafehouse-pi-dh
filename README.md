@@ -1,9 +1,9 @@
 # E-commerce Café House :coffee:
 
-<img alt="home" src="./server/public/img/cafehouse_home.png" width="60%">
-<img alt="produtos" src="./server/public/img/cafehouse_produtos.png" width="60%">
-<img alt="carrinho" src="./server/public/img/cafehouse_carrinho.png" width="60%">
-<img alt="login" src="./server/public/img/cafehouse_login.png" width="60%">
+<img alt="home" src="./server/public/img/cafehouse_home.png" width="60%"><br /><br />
+<img alt="produtos" src="./server/public/img/cafehouse_produtos.png" width="60%"><br /><br />
+<img alt="carrinho" src="./server/public/img/cafehouse_carrinho.png" width="60%"><br /><br />
+<img alt="login" src="./server/public/img/cafehouse_login.png" width="60%"><br /><br />
 <img alt="area-do-cliente" src="./server/public/img/cafehouse_area_do_cliente.png" width="60%">
 
 ## Sobre o projeto :information_source:
